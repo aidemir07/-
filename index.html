@@ -5,30 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AIDI Car Detailing</title>
   <style>
-    .image-box {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.image-box img {
-  max-width: 100%;
-  width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-    
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #3b3b3b;
-      
     }
 
     header {
       background-color: #2f456d;
       color: white;
-      padding: 20px 40px;
+      padding: 40px 40px;
       text-align: center;
+    }
+
+    .header-title {
+      font-size: 3em;
+      font-weight: bold;
+      background: linear-gradient(90deg, rgb(255, 223, 164) 0%, rgba(0, 204, 255, 1) 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     nav {
@@ -49,12 +46,27 @@
       text-decoration: underline;
     }
 
+    /* Seksoni kryesor ku shfaqet fotografia si background */
     .hero {
       padding: 60px;
       text-align: center;
-      background: url('https://source.unsplash.com/1600x600/?nature') no-repeat center center;
+      background: url('https://irp.cdn-website.com/8b4307b1/dms3rep/multi/auto+detailing.jpg') no-repeat center center;
       background-size: cover;
       color: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Mbulojme foton me transparencë */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3); /* Mbushja me transparencë */
+      z-index: -1;
     }
 
     .content {
@@ -65,6 +77,51 @@
       box-shadow: 0 0 10px rgba(156, 155, 155, 0.1);
     }
 
+    .services-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease-out;
+      background-color: #444;
+      color: white;
+      padding: 0 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 90%;
+    }
+
+    .services-container.open {
+      max-height: 500px;
+      padding: 20px;
+    }
+
+    .services-container ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .services-container li {
+      padding: 10px 0;
+      border-bottom: 1px solid #666;
+    }
+
+    .about-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease-out;
+      background-color: #4a4a4a;
+      color: white;
+      padding: 0 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 90%;
+    }
+
+    .about-container.open {
+      max-height: 300px;
+      padding: 20px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -72,150 +129,180 @@
       color: white;
       margin-top: 40px;
     }
+
+    #contact-section {
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: #f7f7f7;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 17px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+
+    /* Video container style */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #000;
+      margin: 20px auto;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
-    
-    
+
   <header>
-    <h1>AIDI Car Detailing</h1>
-    <p>Aid Hasani</p>
+    <h1 class="header-title">AIDI Car Detailing</h1>
   </header>
 
   <nav>
     <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Contact
-    </a>
+    <a href="#about-section">About</a>
+    <a href="#services-list">Services</a>
+    <a href="#contact-section" id="contact-link">Contact</a>
   </nav>
 
   <section class="hero">
-    <h2></h2>
-    <p><style>
-        a:link, a:visited {
-          background-color: #c4c4c4;
-          color: white;
-          padding: 15px 25px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-        }
-        
-        a:hover, a:active {
-          background-color: red;
-        }
-        </style><a href="https://www.youtube.com/watch?v=XevlJ4rEd3Y&ab_channel=VermijlCarDetail">Youtube</a></p>
+    <h2>Shiko Video</h2>
+  </section>
+
+  <section class="services-container" id="services-list">
+    <ul>
+      <li>1. Larje nga jashtë (10 euro)</li>
+      <li>2. Pastrim interiori (10 euro)</li>
+      <li>3. Pastrim i thellë (50 euro)</li>
+      <li>4. Polirim i dritave (20 euro)</li>
+    </ul>
+  </section>
+
+  <section class="about-container" id="about-section">
+    <p>
+      AIDI Car Detailing është një kompani profesionale e pastrimit dhe mirëmbajtjes së automjeteve, e themeluar nga Aid Hasani.
+      Ne ofrojmë një gamë të gjerë shërbimesh duke filluar nga larja e jashtme, pastrimi i brendshëm, deri te pastrimi i thellë dhe polirimi i dritave.
+      Me fokus në cilësi dhe përkushtim maksimal, ne sigurojmë që çdo makinë të dalë nga ne më e pastër, më e shndritshme dhe më e mbrojtur.
+    </p>
   </section>
 
   <section class="content">
-    <h2><div class="image-box">
-  <img src="https://irp.cdn-website.com/8b4307b1/dms3rep/multi/auto+detailing.jpg" alt="Auto Detailing Image">
-</div></h2>
-    <p>
-      
-    </p>
+    <div class="video-container">
+      <iframe width="100%" height="500" src="https://www.youtube.com/embed/XevlJ4rEd3Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
   </section>
-  
+
   <footer>
-    &copy; 2025 AIDI-Company - Te gjitha të drejtat e rezervuara
-    <h2>Na Kontakto</h2>
-    <style>
-        .form-container {
-          max-width: 500px;
-          margin: 50px auto;
-          background-color: #f7f7f7;
-          padding: 30px;
-          border-radius: 15px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-          font-family: 'Segoe UI', sans-serif;
-        }
-      
-        .form-container h2 {
-          text-align: center;
-          margin-bottom: 25px;
-          color: #333;
-        }
-      
-        .form-group {
-          margin-bottom: 20px;
-        }
-      
-        .form-group label {
-          display: block;
-          margin-bottom: 8px;
-          font-weight: 500;
-          color: #444;
-        }
-      
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-          width: 100%;
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          font-size: 16px;
-        }
-      
-        .form-group input[type="radio"],
-        .form-group input[type="checkbox"] {
-          width: auto;
-          margin-right: 5px;
-        }
-      
-        .form-group.inline {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-      
-        .form-container button {
-          width: 100%;
-          padding: 14px;
-          border: none;
-          background-color: #4CAF50;
-          color: white;
-          font-size: 17px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-      
-        .form-container button:hover {
-          background-color: #45a049;
-        }
-      </style>
-      
-      <div class="form-container">
-        <h2>Na Kontakto</h2>
-        <form action="https://getform.io/f/allykxga" method="POST">
-          <div class="form-group">
-            <label for="name">Emri juaj:</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-      
-          <div class="form-group">
-            <label for="email">Email-i juaj:</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-      
-          <div class="form-group">
-            <label for="message">Mesazhi:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-      
-          <!-- honeypot -->
-          <input type="hidden" name="_gotcha" style="display:none !important">
-      
-          
-            </select>
-          </div>
-      
-          <button type="submit">Dërgo Mesazhin</button>
-        </form>
-      </div>
+    &copy; 2025 AIDI-Company - Të gjitha të drejtat e rezervuara
+    <div class="form-container" id="contact-section">
+      <h2>Na Kontakto</h2>
+      <form action="https://getform.io/f/allykxga" method="POST">
+        <div class="form-group">
+          <label for="name">Emri juaj:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email-i juaj:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mesazhi:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <input type="hidden" name="_gotcha" style="display:none !important">
+        <button type="submit">Dërgo Mesazhin</button>
+      </form>
+    </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const servicesLink = document.querySelector('a[href="#services-list"]');
+      const servicesSection = document.getElementById('services-list');
+
+      const aboutLink = document.querySelector('a[href="#about-section"]');
+      const aboutSection = document.getElementById('about-section');
+
+      const contactLink = document.getElementById('contact-link');
+      const contactSection = document.getElementById('contact-section');
+
+      servicesLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        servicesSection.classList.toggle('open');
+      });
+
+      aboutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        aboutSection.classList.toggle('open');
+      });
+
+      contactLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        contactSection.style.opacity = 0;
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+
+        setTimeout(() => {
+          contactSection.style.opacity = 1;
+        }, 500);
+      });
+    });
+  </script>
 
 </body>
 </html>
